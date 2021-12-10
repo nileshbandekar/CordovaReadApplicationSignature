@@ -72,7 +72,7 @@ public class ReadAppSignature extends CordovaPlugin {
         }
         digest.update(sig);
 //         byte[] hashtext =  digest.digest();
-        return Base64.encodeToString(digest.digest(), Base64.DEFAULT);
+        return Base64.encodeToString(digest.digest(), Base64.DEFAULT).trim();
     }
 
     interface Actions {
