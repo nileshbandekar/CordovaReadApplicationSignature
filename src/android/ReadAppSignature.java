@@ -16,7 +16,6 @@ import android.content.pm.Signature;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import android.util.Base64;
 
 
@@ -68,7 +67,7 @@ public class ReadAppSignature extends CordovaPlugin {
             digest = MessageDigest.getInstance("SHA1");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        } catch (NoSuchProviderException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         digest.update(sig);
