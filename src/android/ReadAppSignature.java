@@ -17,6 +17,7 @@ import android.content.pm.Signature;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import android.util.Base64;
 
 
 /**
