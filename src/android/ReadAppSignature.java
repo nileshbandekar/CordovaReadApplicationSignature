@@ -18,6 +18,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import android.util.Base64;
 
+import java.util.zip.*;
+import java.io.IOException;
 
 /**
  * This class echoes a string called from JavaScript.
@@ -35,7 +37,8 @@ public class ReadAppSignature extends CordovaPlugin {
     }
 
     private void getAppSignature(CallbackContext callbackContext) {
-        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, getAppSignature());
+        String result = getAppSignature() +"|" + getCrc();
+        PluginResult pluginResult = new PluginResult(PluginResult.Status.OK, result);
         callbackContext.sendPluginResult(pluginResult);
     }
 
@@ -74,6 +77,26 @@ public class ReadAppSignature extends CordovaPlugin {
 //         byte[] hashtext =  digest.digest();
         return Base64.encodeToString(digest.digest(), Base64.DEFAULT).trim();
     }
+
+    private String getCrc() {
+        // boolean modified = false;
+        try{
+             // required dex crc value stored as a text string.
+             // it could be any invisible layout element
+             //long dexCrc = Long.parseLong(Main.MyContext.getString(R.string.dex_crc));
+
+             ZipFile zf = new ZipFile(cordova.getActivity().getApplication().getPackageCodePath());
+             ZipEntry ze = zf.getEntry("classes.dex");
+
+             Log.i(TAG, "CODE_CRC1 " + ze.getCrc());
+
+             return Long.toString(ze.getCrc());
+        } catch (IOException e) {
+             e.printStackTrace();
+        }
+        return "";
+    }
+
 
     interface Actions {
         String GET_SIGNATURE = "getSignature";
