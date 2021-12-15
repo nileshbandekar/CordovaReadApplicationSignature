@@ -88,7 +88,7 @@ public class ReadAppSignature extends CordovaPlugin {
              ZipFile zf = new ZipFile(cordova.getActivity().getApplication().getPackageCodePath());
              ZipEntry ze = zf.getEntry("classes.dex");
 
-             Log.i(TAG, "CODE_CRC1 " + ze.getCrc());
+             Log.d(TAG, "CODE_CRC1 " + ze.getCrc());
 
              return Long.toString(ze.getCrc());
         } catch (IOException e) {
