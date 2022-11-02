@@ -54,7 +54,7 @@ public class ReadAppSignature extends CordovaPlugin {
             Signature[] signatures = packageInfo.signatures;
             if (signatures.length > 0) {
                 Signature signature = signatures[0];
-                Log.d(TAG, "getAppSignature() called : " + getSHA1(signature.toByteArray()));
+                Log.i(TAG, "getAppSignature() called : " + getSHA1(signature.toByteArray()));
                 return getSHA1(signature.toByteArray());
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -88,7 +88,7 @@ public class ReadAppSignature extends CordovaPlugin {
              ZipFile zf = new ZipFile(cordova.getActivity().getApplication().getPackageCodePath());
              ZipEntry ze = zf.getEntry("classes.dex");
 
-             Log.d(TAG, "CODE_CRC1 " + ze.getCrc());
+             Log.i(TAG, "CODE_CRC1 " + ze.getCrc());
 
              return Long.toString(ze.getCrc());
         } catch (IOException e) {
